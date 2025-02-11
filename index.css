@@ -1,0 +1,44 @@
+.student-popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: auto;
+  color: aliceblue;
+  border-radius: 7px 7px 7px 7px;
+  background-color: rgb(120, 87, 87);
+  padding: 20px;
+}
+
+.stylemodalInput {
+  display: flex;
+  padding: 10px;
+  justify-content: space-between;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  border-radius: 7px;
+  margin-top: 30px;
+}
+th {
+  background-color: rgb(11, 10, 10);
+  color: white;
+  padding: 8px;
+  border: 2px solid white;
+}
+td {
+  border: 2px solid #000000;
+  text-align: center;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+tr:hover {
+  background-color: #d6eeee;
+}
