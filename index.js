@@ -1,3 +1,4 @@
+import Chart from "https://cdn.jsdelivr.net/npm/chart.js";
 let studentsData = [];
 let counter = 0;
 let studentTable = document.querySelector("tbody");
@@ -18,8 +19,8 @@ document.getElementById("form").addEventListener("submit", function (e) {
   let physicsValue = document.getElementById("physicsValue").value.trim();
 
   //   if (checkStudentName(studentNameValue)) {
-  //     alert("Student already Exist");
-  //     return;
+  //
+  //
   //   }
 
   let newData = {
@@ -59,7 +60,6 @@ document.getElementById("closeAddBtn").addEventListener("click", function () {
 function renderStudentData() {
   studentTable.innerHTML = "";
 
-  // Display the records for the current page
   for (let i = 0; i < studentsData.length; i++) {
     const student = studentsData[i];
     const row = document.createElement("tr");
@@ -74,13 +74,13 @@ function renderStudentData() {
             <td>${student.socialmarks}</td>
             <td>${student.physicsmarks}</td>
             <td>
-           <select name="graphs" id="graphs" onchange="updateChart(i)" >
-<option value="bargraph">Horizontal Bar Graph</option>
-<option value="verticalbar">Vertical Bar Graph</option>
-<option value="pie">Pie Chart</option>
-<option value="donut">Donut Chart</option>
-</select>
-<button>Remove Student </button>
+           <select name="graphs" id="graphs${i}" onchange="updateChart(${i})">
+                            <option value="bargraph">Horizontal Bar Graph</option>
+                            <option value="verticalbar">Vertical Bar Graph</option>
+                            <option value="pie">Pie Chart</option>
+                            <option value="donut">Donut Chart</option>
+                        </select>
+                        <button onclick="removeStudent(${i})">Remove Student</button>
             </td>
             
         `;
@@ -92,21 +92,52 @@ const ctx = document.getElementById("studentPlot").getContext("2d");
 let myChart;
 
 function updateChart(index) {
-  const xValues = Object.keys(studentsData[index]);
-  const yValues = Object.values(studentsData[index]);
+  const student = studentsData[index];
+  const labels = [
+    "First Language",
+    "Second Language",
+    "English",
+    "Maths",
+    "Social",
+    "Physics",
+  ];
+  const values = [
+    parseFloat(student.firstlangmarks),
+    parseFloat(student.secondlangmarks),
+    parseFloat(student.englishmarks),
+    parseFloat(student.mathsmarks),
+    parseFloat(student.socialmarks),
+    parseFloat(student.physicsmarks),
+  ];
+
   if (myChart) {
-    myChart.destroy(); // Destroy the previous chart instance
+    myChart.destroy();
   }
+
   myChart = new Chart(ctx, {
-    type: "bar", // Change this to your desired chart type
+    type: "bar",
     data: {
-      labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+      labels: labels,
       datasets: [
         {
-          label: data.label,
-          data: data.values,
-          backgroundColor: "rgba(75, 192, 192, 0.2)",
-          borderColor: "rgba(75, 192, 192, 1)",
+          label: student.studentname,
+          data: values,
+          backgroundColor: [
+            "rgba(255, 99, 132, 0.2)",
+            "rgba(54, 162, 235, 0.2)",
+            "rgba(255, 206, 86, 0.2)",
+            "rgba(75, 192, 192, 0.2)",
+            "rgba(153, 102, 255, 0.2)",
+            "rgba(255, 159, 64, 0.2)",
+          ],
+          borderColor: [
+            "rgba(255, 99, 132, 1)",
+            "rgba(54, 162, 235, 1)",
+            "rgba(255, 206, 86, 1)",
+            "rgba(75, 192, 192, 1)",
+            "rgba(153, 102, 255, 1)",
+            "rgba(255, 159, 64, 1)",
+          ],
           borderWidth: 1,
         },
       ],
@@ -120,4 +151,12 @@ function updateChart(index) {
       },
     },
   });
+}
+
+function removeStudent(index) {
+  studentsData.splice(index, 1); // Remove the student from the array
+  renderStudentData(); // Re-render the student data
+  if (myChart) {
+    myChart.destroy(); // Destroy the chart if it exists
+  }
 }
