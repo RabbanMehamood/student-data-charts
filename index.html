@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Data Visualization</title>
     <link rel="stylesheet" href="index.css" />
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
   </head>
   <body>
     <div class="table_style">
@@ -29,9 +28,7 @@
             <th>Graphs | Charts | Remove</th>
           </tr>
         </thead>
-        <tbody>
-          <!-- checked Getting object data here and table getting displayed ---------------------------- -->
-        </tbody>
+        <tbody></tbody>
       </table>
     </div>
 
@@ -72,9 +69,11 @@
       </div>
     </div>
 
-    <div  style="width:100%;max-width:700px">
+    <div  style="width:100%;max-width:700px; display: flex; justify-content: center; align-items: center;">
+
       <canvas id="studentPlot"></canvas>
+
     </div>
-    <script type="module" src="index.js"></script>
+     <script type="module" src="index.js"></script>
   </body>
 </html>
