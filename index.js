@@ -7,8 +7,7 @@ console.log(studentTable);
 const ctx = document.getElementById("studentPlot").getContext("2d");
 let myChart;
 
-window.updateChart = function (index) {
-  const chartType = document.getElementById("selectGraph").value;
+window.updateChart = function (index, chartType) {
   const student = studentsData[index];
   const labels = [
     "First Language",
@@ -40,12 +39,12 @@ window.updateChart = function (index) {
           label: student.studentname,
           data: values,
           backgroundColor: [
-            "rgba(255, 99, 132, 0.2)",
+            "rgb(255, 99, 133)",
             "rgb(54, 163, 235)",
             "rgb(255, 207, 86)",
             "rgb(75, 192, 192)",
             "rgb(153, 102, 255)",
-            "rgba(255, 159, 64, 0.2)",
+            "rgb(255, 160, 64)",
           ],
           borderColor: [
             "rgba(255, 99, 132, 1)",
@@ -144,7 +143,7 @@ function renderStudentData() {
             <td>${student.socialmarks}</td>
             <td>${student.physicsmarks}</td>
             <td>
-           <select name="graphs" id="selectGraph" onchange="updateChart(${i})">
+           <select name="graphs" id="selectGraph" onchange="updateChart(${i},this.value)">
                             <option value="bar">Vertical Bar Graph</option>
                             <option value="horizontalBar">Horizontal Bar Graph</option>               
                             <option value="pie">Pie Chart</option>
